@@ -1,17 +1,42 @@
 const gameContainer = document.getElementById('game');
 const cells = document.querySelectorAll('.cell');
+const playButton = document.getElementById('playButton');
+const resetButton = document.getElementById('resetButton');
 let board = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
 let moves = 0;
-let gameActive = true;
+let gameActive = false;
 let moveMode = false; // For moving pieces
 let selectedPieceIndex = null;
 
-cells.forEach((cell, index) => {
-    cell.addEventListener('click', () => handleCellClick(index));
+playButton.addEventListener('click', startGame);
+resetButton.addEventListener('click', resetGame);
+
+const backButton = document.getElementById('backButton');
+
+backButton.addEventListener('click', () => {
+    // Resetar o jogo
+    resetGame();
+    // Esconder o tabuleiro
+    gameContainer.style.display = 'none';
+    // Mostrar o botão de jogar
+    playButton.style.display = 'block';
+    // Esconder o botão de reiniciar
+    resetButton.style.display = 'none';
+    // Esconder o botão de voltar
+    backButton.style.display = 'none';
 });
 
+function startGame() {
+    gameActive = true;
+    playButton.style.display = 'none';
+    resetButton.style.display = 'none';
+    backButton.style.display = 'block'; // Mostrar o botão de voltar durante o jogo
+    renderBoard();
+}
+
 function renderBoard() {
+    gameContainer.style.display = 'block';
     cells.forEach((cell, index) => {
         const content = board[index];
         const contentElement = document.createElement('div');
@@ -79,20 +104,12 @@ function checkWinner() {
 }
 
 function highlightWinner(pattern) {
-    const [a,  b, c] = pattern;
+    const [a, b, c] = pattern;
     const winnerColor = board[a] === 'X' ? '#b5dcf7' : '#edc174';
     gameContainer.style.backgroundColor = winnerColor;
-    cells[a].classList.add('blink-twice');
-    cells[b].classList.add('blink-twice');
-    cells[c].classList.add('blink-twice');
-    setTimeout(() => {
-        cells[a].classList.remove('blink-twice');
-        cells[b].classList.remove('blink-twice');
-        cells[c].classList.remove('blink-twice');
-        cells[a].classList.add('blink-thrice');
-        cells[b].classList.add('blink-thrice');
-        cells[c].classList.add('blink-thrice');
-    }, 200); // 200ms para a segunda piscada
+    cells[a].classList.add('blink-thrice');
+    cells[b].classList.add('blink-thrice');
+    cells[c].classList.add('blink-thrice');
     setTimeout(() => {
         cells[a].classList.remove('blink-thrice');
         cells[b].classList.remove('blink-thrice');
@@ -101,6 +118,28 @@ function highlightWinner(pattern) {
         cells[b].style.backgroundColor = '#4d4957';
         cells[c].style.backgroundColor = '#4d4957';
     }, 600); // 600ms para mudar permanentemente a cor
+    setTimeout(() => {
+        resetButton.style.display = 'block';
+    }, 800); // Mostrar o botão de reinício após a animação de piscar
 }
+
+function resetGame() {
+    board = ['', '', '', '', '', '', '', '', ''];
+    currentPlayer = 'X';
+    moves = 0;
+    gameActive = true; // Corrigindo o reinício do jogo
+    moveMode = false;
+    selectedPieceIndex = null;
+    resetButton.style.display = 'none';
+    cells.forEach(cell => {
+        cell.style.backgroundColor = '#27242e';
+    });
+    renderBoard();
+}
+
+
+cells.forEach((cell, index) => {
+    cell.addEventListener('click', () => handleCellClick(index));
+});
 
 renderBoard();

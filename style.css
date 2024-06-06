@@ -22,13 +22,11 @@ header {
     z-index: 1;
     font-size: 2.5rem;
     font-weight: bolder;
-    font-family: 'Press Start 2P', cursive;
 }
 
 footer {
     position: fixed;
     bottom: 0;
-    margin-bottom: 20px;
     width: 100%;
     text-align: center;
     color: #27242e;
@@ -48,7 +46,7 @@ footer {
 
 #playButton {
     padding: 10px 20px;
-    font-size: 1rem;
+    font-size: 2rem;
     cursor: pointer;
     background-color: #4d4957;
     color: white;
@@ -178,7 +176,7 @@ footer {
 #resetButton {
     margin-bottom: 20px;
     padding: 10px 20px;
-    font-size: 1rem;
+    font-size: 1.5rem;
     cursor: pointer;
     background-color: #4d4957;
     color: white;
@@ -187,7 +185,7 @@ footer {
     position: fixed;
     bottom: 50px;
     transition: 0.3s;
-    animation: fadeIn 0.2s ease-in-out forwards;
+    animation: fadeIn 0.3s ease-in-out forwards;
     opacity: 0;
 }
 
@@ -203,8 +201,8 @@ footer {
 
 #backButton {
     position: fixed;
-    top: 42px; /* Ajuste conforme necessário */
-    left: 30px; /* Ajuste conforme necessário */
+    top: -10px; /* Ajuste conforme necessário */
+    left: -10px; /* Ajuste conforme necessário */
     padding: 10px 20px;
     font-size: 2rem;
     cursor: pointer;

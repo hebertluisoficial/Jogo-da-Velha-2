@@ -117,7 +117,7 @@ function highlightWinner(pattern) {
         cells[a].style.backgroundColor = '#4d4957';
         cells[b].style.backgroundColor = '#4d4957';
         cells[c].style.backgroundColor = '#4d4957';
-    }, 600); // 600ms para mudar permanentemente a cor
+    }, 400); // 600ms para mudar permanentemente a cor
     setTimeout(() => {
         resetButton.style.display = 'block';
     }, 800); // Mostrar o botão de reinício após a animação de piscar
